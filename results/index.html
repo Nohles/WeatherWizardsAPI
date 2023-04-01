@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="style.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <title>Results</title>
+</head>
+
+<body style="text-align: center" id="body">
+  <!-- <h1 style = "color:green;" > 
+        GeeksForGeeks 
+    </h1> -->
+
+  <p id="GFG_UP" style="font-size: 15px; font-weight: bold"></p>
+
+  <button onclick="constructTable('#table')">click here to get runs</button>
+
+  <br /><br />
+  Choose a runID
+
+  <input type="test" name="runID" id="runID" />
+  <br /><br />
+  GrowthHabit
+  <select type="test" name="GrowthHabit" id="GrowthHabit">
+    <option value=""></option>
+    <option value="Tree">Tree</option>
+    <option value="Flower">Flower</option>
+    <option value="Grass">Grass</option>
+    <option value="Fruit">Fruit</option>
+    <option value="Nuts">Nuts</option>
+    <option value="Shrub">Shrub</option>
+    <option value="Herb">Herb</option>
+  </select>
+  <br /><br />
+  season
+  <select type="test" name="season" id="season">
+    <option value=""></option>
+    <option value="Spring">Spring</option>
+    <option value="Summer">Summer</option>
+    <option value="Fall">Fall</option>
+    <option value="Winter">Winter</option>
+  </select>
+  <br /><br />
+  state
+  <select type="test" name="state" id="state">
+    <option value=""></option>
+    <option value="AL">Alabama</option>
+    <option value="AK">Alaska</option>
+    <option value="AZ">Arizona</option>
+    <option value="AR">Arkansas</option>
+    <option value="CA">California</option>
+    <option value="CO">Colorado</option>
+    <option value="CT">Connecticut</option>
+    <option value="DE">Delaware</option>
+    <option value="DC">District Of Columbia</option>
+    <option value="FL">Florida</option>
+    <option value="GA">Georgia</option>
+    <option value="HI">Hawaii</option>
+    <option value="ID">Idaho</option>
+    <option value="IL">Illinois</option>
+    <option value="IN">Indiana</option>
+    <option value="IA">Iowa</option>
+    <option value="KS">Kansas</option>
+    <option value="KY">Kentucky</option>
+    <option value="LA">Louisiana</option>
+    <option value="ME">Maine</option>
+    <option value="MD">Maryland</option>
+    <option value="MA">Massachusetts</option>
+    <option value="MI">Michigan</option>
+    <option value="MN">Minnesota</option>
+    <option value="MS">Mississippi</option>
+    <option value="MO">Missouri</option>
+    <option value="MT">Montana</option>
+    <option value="NE">Nebraska</option>
+    <option value="NV">Nevada</option>
+    <option value="NH">New Hampshire</option>
+    <option value="NJ">New Jersey</option>
+    <option value="NM">New Mexico</option>
+    <option value="NY">New York</option>
+    <option value="NC">North Carolina</option>
+    <option value="ND">North Dakota</option>
+    <option value="OH">Ohio</option>
+    <option value="OK">Oklahoma</option>
+    <option value="OR">Oregon</option>
+    <option value="PA">Pennsylvania</option>
+    <option value="RI">Rhode Island</option>
+    <option value="SC">South Carolina</option>
+    <option value="SD">South Dakota</option>
+    <option value="TN">Tennessee</option>
+    <option value="TX">Texas</option>
+    <option value="UT">Utah</option>
+    <option value="VT">Vermont</option>
+    <option value="VA">Virginia</option>
+    <option value="WA">Washington</option>
+    <option value="WV">West Virginia</option>
+    <option value="WI">Wisconsin</option>
+    <option value="WY">Wyoming</option>
+  </select>
+  <br /><br />
+  BloomPeriod
+  <select type="test" name="bloom" id="bloom">
+    <option value=""></option>
+    <option value="Spring">Spring</option>
+    <option value="Early Spring">Early Spring</option>
+    <option value="Mid Spring">Mid Spring</option>
+    <option value="Late Spring">Late Spring</option>
+
+    <option value="Summer">Summer</option>
+    <option value="Early Summer">Early Summer</option>
+    <option value="Mid Summer">Mid Summer</option>
+    <option value="Late Summer">Late Summer</option>
+    <option value="Fall">Fall</option>
+    <option value="Early Fall">Early Fall</option>
+    <option value="Mid Fall">Mid Fall</option>
+    <option value="Late Fall">Late Fall</option>
+    <option value="Winter">Winter</option>
+    <option value="Early Winter">Early Winter</option>
+    <option value="Mid Winter">Mid Winter</option>
+    <option value="Late Winter">Late Winter</option>
+
+  </select>
+  <br /><br />
+  CommercialAvailability
+  <select type="test" name="comava" id="comava">
+    <option value=""></option>
+    <option value="Routinely Available">Routinely Available</option>
+    <option value="Contracting Only">Contracting Only</option>
+    <option value="Field Collections Only">Field Collections Only</option>
+    <option value="No Known Source">No Known Source</option>
+  </select>
+  <br /><br />
+  DroughtTolerance
+  <select type="test" name="DroughtTolerance" id="DroughtTolerance">
+    <option value=""></option>
+    <option value="None">None</option>
+    <option value="Low">Low</option>
+    <option value="Medium">Medium</option>
+    <option value="High">High</option>
+  </select>
+  <br /><br />
+  PalatableHuman
+  <select type="test" name="PalatableHuman" id="PalatableHuman">
+    <option value=""></option>
+    <option value="Yes">Yes</option>
+    <option value="No">No</option>
+  </select>
+
+  <br /><br />
+
+  <button onclick="getResults()">Search</button> <br />
+
+  <table align="center" id="table" border="1"></table>
+  <br></br>
+  <br></br>
+  <table align="center" id="table2" border="1"></table>
+  <!-- <table 
+    id="table" >
+</table> -->
+
+  <script>
+    var runsListed;
+    var el_up = document.getElementById("GFG_UP");
+    var list;
+    var list2;
+    var apiUrl = "https://api.nohles.dev/api/runs/getnewRuns.php";
+    fetch(apiUrl)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        list = data;
+        console.log(data);
+      })
+      .catch((err) => {
+        // Do something for an error here
+      });
+
+    // var list = ;
+
+    el_up.innerHTML =
+      "Click on the button to create " +
+      "the table from the JSON data.<br><br>" +
+      JSON.stringify(list[0]) +
+      "<br>" +
+      JSON.stringify(list[1]) +
+      "<br>" +
+      JSON.stringify(list[2]);
+
+    function constructTable(selector) {
+      runsListed = true;
+      // Getting the all column names
+      var cols = Headers(list, selector);
+
+      // Traversing the JSON data
+      for (var i = 0; i < list.length; i++) {
+        var row = $("<tr/>");
+        for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+          var val = list[i][cols[colIndex]];
+
+          // If there is any key, which is matching
+          // with the column name
+          if (val == null) val = "";
+          row.append($("<td/>").html(val));
+        }
+
+        // Adding each row to the table
+        $(selector).append(row);
+      }
+    }
+
+    function Headers(list, selector) {
+      var columns = [];
+      var header = $("<tr/>");
+
+      for (var i = 0; i < list.length; i++) {
+        var row = list[i];
+
+        for (var k in row) {
+          if ($.inArray(k, columns) == -1) {
+            columns.push(k);
+
+            // Creating the header
+            header.append($("<th/>").html(k));
+          }
+        }
+      }
+
+      // Appending the header to the table
+      $(selector).append(header);
+      return columns;
+    }
+
+    function constructTable2(selector) {
+      runsListed = true;
+      // Getting the all column names
+      var cols = Headers(list2, selector);
+
+      // Traversing the JSON data
+      for (var i = 0; i < list2.length; i++) {
+        var row = $("<tr/>");
+        for (var colIndex = 0; colIndex < cols.length; colIndex++) {
+          var val = list2[i][cols[colIndex]];
+
+          // If there is any key, which is matching
+          // with the column name
+          if (val == null) val = "";
+          row.append($("<td/>").html(val));
+        }
+
+        // Adding each row to the table
+        $(selector).append(row);
+      }
+    }
+
+    function Headers(list2, selector) {
+      var columns = [];
+      var header = $("<tr/>");
+
+      for (var i = 0; i < list2.length; i++) {
+        var row = list2[i];
+
+        for (var k in row) {
+          if ($.inArray(k, columns) == -1) {
+            columns.push(k);
+
+            // Creating the header
+            header.append($("<th/>").html(k));
+          }
+        }
+      }
+
+      // Appending the header to the table
+      $(selector).append(header);
+      return columns;
+    }
+
+
+    function getResults() {
+      //console.log(runID.value);
+      if ((runID.value != "")) {
+        var apiUrl =
+          "https://api.nohles.dev/api/sensor/getSensorData.php?runID=" +
+          runID.value;
+        // var apiUrl =
+        //   "https://api.nohles.dev/api/sensor/getSensorData.php?runID=401";
+
+        fetch(apiUrl)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            //list = data;
+
+            console.log(data.temp);
+            getPlantData(data)
+          })
+          .catch((err) => {
+            // Do something for an error here
+          });
+      } else {
+      }
+
+      function getPlantData(data) {
+
+        var apiUrl =
+          "https://api.nohles.dev/api/Plantdb/searchAdvforResultsOutput.php?TemperatureMinimum=" + data.temp + "&moisture=" + data.moisture + "&Shade=" + data.light + "&PH=" + data.PH + "&GrowthHabit=" + GrowthHabit.value + "&season=" + season.value + "&State=" + state.value + "&BloomPeriod=" + bloom.value + "&CommercialAvailability=" + comava.value + "&DroughtTolerance=" + DroughtTolerance.value + "&PalatableHuman=" + PalatableHuman.value;
+        console.log(apiUrl);
+        fetch(apiUrl)
+          .then((response) => {
+            return response.json();
+          })
+          .then((data) => {
+            list2 = data;
+            constructTable2('#table2')
+            console.log(data);
+          })
+          .catch((err) => {
+            // Do something for an error here
+          });
+
+      }
+    }
+  </script>
+</body>
+
+</html>
